@@ -37,11 +37,11 @@ end
 categoria = lower(categoria);
 if categoria == 1 || categoria == 'i'
     imp = 0.6;
-elseif categoria == 1 || categoria == 'ii' %#ok<BDSCA>
+elseif categoria == 2 || categoria == 'ii' %#ok<BDSCA>
     imp = 1.0;
-elseif categoria == 1 || categoria == 'iii' %#ok<BDSCA>
+elseif categoria == 3 || categoria == 'iii' %#ok<BDSCA>
     imp = 1.2;
-elseif categoria == 1 || categoria == 'iv' %#ok<BDSCA>
+elseif categoria == 4 || categoria == 'iv' %#ok<BDSCA>
     imp = 1.2;
 else
     error('Categoria desconocida');
