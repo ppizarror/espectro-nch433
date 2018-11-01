@@ -1,2 +1,5 @@
 # Ignora archivos matlab
 *.asv
+
+# Ignora resultados
+*.txt
