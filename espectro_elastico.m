@@ -1,17 +1,20 @@
-function [t, sa] = espectro_elastico(categoria, zona, suelo, tmax, doplot, tmaxplot)
+function [t, sa] = espectro_elastico(categoria, zona, suelo, tmax, doplot, tmaxplot, savef)
 %ESPECTRO_ELASTICO Calcula el espectro elastico.
 %
 %   [t, sa] = espectro_elastico(categoria, zona, suelo);
 %   [t, sa] = espectro_elastico(categoria, zona, suelo, tmax);
 %   [t, sa] = espectro_elastico(categoria, zona, suelo, tmax, doplot);
 %   [t, sa] = espectro_elastico(categoria, zona, suelo, tmax, doplot, tmaxplot);
+%   [t, sa] = espectro_elastico(categoria, zona, suelo, tmax, doplot, tmaxplot, savef);
 %
 % En donde:
 %   categoria       Categoria (1, 2, 3, 4) o (i, ii, iii,iv)
 %   zona            Zona sismica (1, 2, 3)
 %   suelo           Tipo suelo (A, B, C, D, E)
-%   graficar        Indica si muestra el grafico al finalizar
 %   tmax            Periodo maximo
+%   doplot          Indica si grafica o no
+%   tmaxplot        Periodo maximo a graficar
+%   savef           Guarda un archivo
 %
 % Ejemplo:
 %   [t, sa] = espectro_elastico(1, 3, 'c', 10, true);
@@ -25,6 +28,9 @@ if ~exist('doplot', 'var')
 end
 if ~exist('tmaxplot', 'var')
     tmaxplot = 3.0;
+end
+if ~exist('savef', 'var')
+    savef = false;
 end
 
 %% Obtiene categoria (importancia)
@@ -76,16 +82,19 @@ if doplot
     grid on;
     grid minor;
     xlim([0, tmaxplot]);
+    legend({'Espectro elástico'}, 'location', 'northeast');
 end
 
 %% Guarda los resultados
-fileID = fopen('esp-el.txt', 'w');
-for i = 1:maxelems
-    fprintf(fileID, '%f\t%f', t(i), sa(i));
-    if i < maxelems
-        fprintf(fileID, '\n');
+if savef
+    fileID = fopen('esp-el.txt', 'w');
+    for i = 1:maxelems
+        fprintf(fileID, '%f\t%f', t(i), sa(i));
+        if i < maxelems
+            fprintf(fileID, '\n');
+        end
     end
+    fclose(fileID);
 end
-fclose(fileID);
 
 end
