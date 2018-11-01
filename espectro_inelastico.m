@@ -51,8 +51,8 @@ say = sa ./ ry;
 %% Grafica
 if doplot
     hold on;
-    plot(t, sax);
-    plot(t, say);
+    plot(t, sax, 'LineWidth', 1);
+    plot(t, say, 'LineWidth', 1);
     legend({'Espectro elástico', 'Espectro inelastico x', 'Espectro inelastico y'}, ...
         'location', 'northeast');
 end
